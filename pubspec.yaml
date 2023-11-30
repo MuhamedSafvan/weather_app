@@ -40,10 +40,19 @@ dependencies:
   dio: ^5.3.4
   equatable: ^2.0.5
   intl: ^0.18.1
+  cached_network_image: ^3.3.0
+  geolocator: ^10.1.0
+  geocoding: ^2.1.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.13.1"
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "lib/base_module/data/entities/images/app-icon.png"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -80,8 +89,27 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: lib/base_module/data/entities/fonts/Poppins/Poppins-Black.ttf
+        - asset: lib/base_module/data/entities/fonts/Poppins/Poppins-BlackItalic.ttf
+        - asset: lib/base_module/data/entities/fonts/Poppins/Poppins-Bold.ttf
+        - asset: lib/base_module/data/entities/fonts/Poppins/Poppins-BoldItalic.ttf
+        - asset: lib/base_module/data/entities/fonts/Poppins/Poppins-ExtraBold.ttf
+        - asset: lib/base_module/data/entities/fonts/Poppins/Poppins-ExtraBoldItalic.ttf
+        - asset: lib/base_module/data/entities/fonts/Poppins/Poppins-ExtraLight.ttf
+        - asset: lib/base_module/data/entities/fonts/Poppins/Poppins-ExtraLightItalic.ttf
+        - asset: lib/base_module/data/entities/fonts/Poppins/Poppins-Italic.ttf
+        - asset: lib/base_module/data/entities/fonts/Poppins/Poppins-Light.ttf
+        - asset: lib/base_module/data/entities/fonts/Poppins/Poppins-LightItalic.ttf
+        - asset: lib/base_module/data/entities/fonts/Poppins/Poppins-Medium.ttf
+        - asset: lib/base_module/data/entities/fonts/Poppins/Poppins-MediumItalic.ttf
+        - asset: lib/base_module/data/entities/fonts/Poppins/Poppins-Regular.ttf
+        - asset: lib/base_module/data/entities/fonts/Poppins/Poppins-SemiBold.ttf
+        - asset: lib/base_module/data/entities/fonts/Poppins/Poppins-SemiBoldItalic.ttf
+        - asset: lib/base_module/data/entities/fonts/Poppins/Poppins-Thin.ttf
+        - asset: lib/base_module/data/entities/fonts/Poppins/Poppins-ThinItalic.ttf
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf

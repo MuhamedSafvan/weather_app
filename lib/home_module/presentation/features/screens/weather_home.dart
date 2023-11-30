@@ -5,9 +5,17 @@ import '../widgets/forecast_card.dart';
 import '../widgets/random_text_footer.dart';
 import '../widgets/today_card.dart';
 
-class WeatherHome extends StatelessWidget {
+class WeatherHome extends StatefulWidget {
   final WeatherResponse data;
-  const WeatherHome({super.key, required this.data});
+  List<List<WeatherData>> weatherList;
+  WeatherHome({super.key, required this.data, required this.weatherList});
+
+  @override
+  State<WeatherHome> createState() => _WeatherHomeState();
+}
+
+class _WeatherHomeState extends State<WeatherHome> {
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +32,19 @@ class WeatherHome extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TodayCard(
-              data: data,
+              city: widget.data.city!,
+              weatherData: widget.weatherList,
+              index: selectedIndex,
+              onUpdate: (index) {
+                print("selectedIndex $index");
+                setState(() {
+                  selectedIndex = index;
+                });
+              },
             ),
-            ForeCastCard(),
+            ForeCastCard(
+              weatherData: widget.weatherList[selectedIndex],
+            ),
             RandomTextFooter()
           ],
         ),

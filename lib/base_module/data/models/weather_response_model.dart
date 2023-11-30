@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class WeatherResponse {
   String? cod;
   int? message;
@@ -311,4 +313,28 @@ class Coord {
         'lat': lat,
         'lon': lon,
       };
+}
+
+extension GroupBy on Iterable {
+  Map<K, List<V>> groupBy<K, V>(K Function(V) keyFunction) {
+    final result = <K, List<V>>{};
+    for (final element in this) {
+      final key = keyFunction(element);
+      result.putIfAbsent(key, () => []).add(element);
+    }
+    return result;
+  }
+}
+
+String? extractDate(String? dtTxt) {
+  if (dtTxt == null) return null;
+  return dtTxt.split(' ')[0];
+}
+
+String formatTimestampToDate(int timestampSeconds) {
+  // Convert timestamp to DateTime
+  DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(timestampSeconds * 1000);
+  String formattedDate = DateFormat('dd-MMM-yyyy').format(dateTime);
+
+  return formattedDate;
 }

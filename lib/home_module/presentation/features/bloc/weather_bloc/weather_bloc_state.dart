@@ -12,11 +12,12 @@ final class WeatherBlocInitial extends WeatherBlocState {}
 class WeatherBlocLoaded extends WeatherBlocState {
   // final Map<String, dynamic> data;
   final WeatherResponse data;
+  final List<List<WeatherData>> weatherList;
 
-  const WeatherBlocLoaded(this.data);
+  const WeatherBlocLoaded(this.data, this.weatherList);
 
   @override
-  List<Object> get props => [data];
+  List<Object> get props => [data, weatherList];
 }
 
 class WeatherBlocError extends WeatherBlocState {
