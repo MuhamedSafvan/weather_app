@@ -17,8 +17,8 @@ class ForeCastCard extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       width: AppConstants.getSize(context).width * .85,
-      height: AppConstants.getSize(context).height * .15,
-      padding: EdgeInsets.symmetric(horizontal: 10),
+      height: AppConstants.getSize(context).height * .2,
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       clipBehavior: Clip.antiAlias,
       decoration: ShapeDecoration(
         gradient: const RadialGradient(
@@ -34,349 +34,339 @@ class ForeCastCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(25),
         ),
       ),
-      child: GridView.builder(
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: weatherData.length,
-        shrinkWrap: true,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 5, crossAxisSpacing: 15),
-        itemBuilder: (context, index) => Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text(
-              AppConstants.formatTimestampToTime(weatherData[index].dt!),
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 15,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w400,
-                height: 0,
-              ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: 70,
+            width: MediaQuery.sizeOf(context).width,
+            child: ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                itemCount: weatherData.length > 5
+                    ? weatherData.sublist(0, 5).length
+                    : weatherData.length,
+                itemBuilder: (context, index) {
+                  final newWeatherData = weatherData.length > 5
+                      ? weatherData.sublist(0, 5)
+                      : weatherData;
+                  return buildWeatherItem(newWeatherData[index],
+                      AppConstants.getSize(context).width * .05);
+                }),
+          ),
+          if (weatherData.length > 5)
+            SizedBox(
+              height: 10,
             ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: CachedNetworkImage(
-                    imageUrl: AppConstants.getCloudImageUrl(
-                        weatherData[index].weather?.first.icon),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Text(
-                  '${weatherData[index].main?.temp?.round()}${AppConstants.degreeSymbol}',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w400,
-                    height: 0,
-                  ),
-                ),
-              ],
+          if (weatherData.length > 5)
+            Divider(
+              height: 2,
+              color: Colors.white.withOpacity(.7),
+              thickness: 1,
+              endIndent: 15,
+              indent: 15,
             ),
-          ],
-        ),
+          if (weatherData.length > 5)
+            SizedBox(
+              height: 10,
+            ),
+          if (weatherData.length > 5)
+            SizedBox(
+              height: 70,
+              width: MediaQuery.sizeOf(context).width,
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: weatherData.sublist(5).length,
+                  itemBuilder: (context, index) {
+                    final newWeatherData = weatherData.sublist(5);
+
+                    return buildWeatherItem(newWeatherData[index],
+                        AppConstants.getSize(context).width * .05);
+                  }),
+            ),
+          // Expanded(
+          // child: Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //   children: weatherData.length > 5
+          //       ? weatherData
+          //           .sublist(0, 5)
+          //           .map((data) => buildWeatherItem(
+          //               data, AppConstants.getSize(context).width * .05))
+          //           .toList()
+          //       : weatherData
+          //           .map((data) => buildWeatherItem(
+          //               data, AppConstants.getSize(context).width * .05))
+          //           .toList(),
+          // ),
+          // ),
+          // if (weatherData.length > 5)
+          //   SizedBox(
+          //     height: 10,
+          //   ),
+          // if (weatherData.length > 5)
+          //   Divider(
+          //     height: 2,
+          //     color: Colors.white,
+          //     thickness: 2,
+          //   ),
+          // if (weatherData.length > 5)
+          //   SizedBox(
+          //     height: 10,
+          //   ),
+          // if (weatherData.length > 5)
+          //   Expanded(
+          //     child: Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //       children: [
+          //         ...weatherData
+          //             .sublist(5)
+          //             .map((data) => buildWeatherItem(
+          //                 data, AppConstants.getSize(context).width * .05))
+          //             .toList(),
+          //         ...List.generate(
+          //           5 - weatherData.sublist(5).length,
+          //           (index) => SizedBox(
+          //             width: AppConstants.getSize(context).width * .05,
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+        ],
       ),
-      // child: Stack(
+      // child: Column(
       //   children: [
-      //     Positioned(
-      //       left: 30,
-      //       top: 20,
-      //       child: Text(
-      //         'Now',
-      //         style: TextStyle(
-      //           color: Colors.white,
-      //           fontSize: 15,
-      //           fontFamily: 'Poppins',
-      //           fontWeight: FontWeight.w400,
-      //           height: 0,
-      //         ),
+      //     Expanded(
+      //       child: ListView.builder(
+      //         scrollDirection: Axis.horizontal,
+      //         itemCount: splitLists.length,
+      //         itemBuilder: (context, index) {
+      //           return Row(
+      //             children: List.generate(
+      //               splitLists[index].length,
+      //               (subIndex) {
+      //                 return Column(
+      //                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //                   children: [
+      //                     Text(
+      //                       AppConstants.formatTimestampToTime(
+      //                           splitLists[index][subIndex].dt!),
+      //                       style: const TextStyle(
+      //                         color: Colors.white,
+      //                         fontSize: 15,
+      //                         fontFamily: 'Poppins',
+      //                         fontWeight: FontWeight.w400,
+      //                         height: 0,
+      //                       ),
+      //                     ),
+      //                     Expanded(
+      //                       child: Row(
+      //                         crossAxisAlignment: CrossAxisAlignment.center,
+      //                         mainAxisAlignment: MainAxisAlignment.center,
+      //                         children: [
+      //                           SizedBox(
+      //                             // height: 50,
+      //                             width: AppConstants.getSize(context).width *
+      //                                 .05,
+      //                             child: CachedNetworkImage(
+      //                               imageUrl: AppConstants.getCloudImageUrl(
+      //                                   splitLists[index][subIndex]
+      //                                       .weather
+      //                                       ?.first
+      //                                       .icon),
+      //                               fit: BoxFit.cover,
+      //                             ),
+      //                           ),
+      //                           Text(
+      //                             '${splitLists[index][subIndex].main?.temp?.round()}${AppConstants.degreeSymbol}',
+      //                             style: const TextStyle(
+      //                               color: Colors.white,
+      //                               fontSize: 15,
+      //                               fontFamily: 'Poppins',
+      //                               fontWeight: FontWeight.w400,
+      //                               height: 0,
+      //                             ),
+      //                           ),
+      //                         ],
+      //                       ),
+      //                     ),
+      //                   ],
+      //                 );
+      //                 // return Container(
+      //                 //   padding: EdgeInsets.all(8.0),
+      //                 //   child: Text(splitLists[index][subIndex]),
+      //                 // );
+      //               },
+      //             ),
+      //           );
+      //         },
       //       ),
       //     ),
-      //     Positioned(
-      //       left: 30,
-      //       top: 111,
-      //       child: Text(
-      //         '6 AM',
-      //         style: TextStyle(
-      //           color: Colors.white,
-      //           fontSize: 15,
-      //           fontFamily: 'Poppins',
-      //           fontWeight: FontWeight.w400,
-      //           height: 0,
-      //         ),
-      //       ),
-      //     ),
-      //     Positioned(
-      //       left: 94,
-      //       top: 20,
-      //       child: Text(
-      //         '2 AM',
-      //         style: TextStyle(
-      //           color: Colors.white,
-      //           fontSize: 15,
-      //           fontFamily: 'Poppins',
-      //           fontWeight: FontWeight.w400,
-      //           height: 0,
-      //         ),
-      //       ),
-      //     ),
-      //     Positioned(
-      //       left: 94,
-      //       top: 111,
-      //       child: Text(
-      //         '7 AM',
-      //         style: TextStyle(
-      //           color: Colors.white,
-      //           fontSize: 15,
-      //           fontFamily: 'Poppins',
-      //           fontWeight: FontWeight.w400,
-      //           height: 0,
-      //         ),
-      //       ),
-      //     ),
-      //     Positioned(
-      //       left: 158,
-      //       top: 20,
-      //       child: Text(
-      //         '3 AM',
-      //         style: TextStyle(
-      //           color: Colors.white,
-      //           fontSize: 15,
-      //           fontFamily: 'Poppins',
-      //           fontWeight: FontWeight.w400,
-      //           height: 0,
-      //         ),
-      //       ),
-      //     ),
-      //     Positioned(
-      //       left: 158,
-      //       top: 111,
-      //       child: Text(
-      //         '8 AM',
-      //         style: TextStyle(
-      //           color: Colors.white,
-      //           fontSize: 15,
-      //           fontFamily: 'Poppins',
-      //           fontWeight: FontWeight.w400,
-      //           height: 0,
-      //         ),
-      //       ),
-      //     ),
-      //     Positioned(
-      //       left: 222,
-      //       top: 20,
-      //       child: Text(
-      //         '4 AM',
-      //         style: TextStyle(
-      //           color: Colors.white,
-      //           fontSize: 15,
-      //           fontFamily: 'Poppins',
-      //           fontWeight: FontWeight.w400,
-      //           height: 0,
-      //         ),
-      //       ),
-      //     ),
-      //     Positioned(
-      //       left: 222,
-      //       top: 111,
-      //       child: Text(
-      //         '9 AM',
-      //         style: TextStyle(
-      //           color: Colors.white,
-      //           fontSize: 15,
-      //           fontFamily: 'Poppins',
-      //           fontWeight: FontWeight.w400,
-      //           height: 0,
-      //         ),
-      //       ),
-      //     ),
-      //     Positioned(
-      //       left: 286,
-      //       top: 20,
-      //       child: Text(
-      //         '5 AM',
-      //         style: TextStyle(
-      //           color: Colors.white,
-      //           fontSize: 15,
-      //           fontFamily: 'Poppins',
-      //           fontWeight: FontWeight.w400,
-      //           height: 0,
-      //         ),
-      //       ),
-      //     ),
-      //     Positioned(
-      //       left: 286,
-      //       top: 111,
-      //       child: Text(
-      //         '10 AM',
-      //         style: TextStyle(
-      //           color: Colors.white,
-      //           fontSize: 15,
-      //           fontFamily: 'Poppins',
-      //           fontWeight: FontWeight.w400,
-      //           height: 0,
-      //         ),
-      //       ),
-      //     ),
-      //     Positioned(
-      //       left: 51,
-      //       top: 47,
-      //       child: Text(
-      //         '25',
-      //         style: TextStyle(
-      //           color: Colors.white,
-      //           fontSize: 15,
-      //           fontFamily: 'Poppins',
-      //           fontWeight: FontWeight.w400,
-      //           height: 0,
-      //         ),
-      //       ),
-      //     ),
-      //     Positioned(
-      //       left: 51,
-      //       top: 138,
-      //       child: Text(
-      //         '25',
-      //         style: TextStyle(
-      //           color: Colors.white,
-      //           fontSize: 15,
-      //           fontFamily: 'Poppins',
-      //           fontWeight: FontWeight.w400,
-      //           height: 0,
-      //         ),
-      //       ),
-      //     ),
-      //     Positioned(
-      //       left: 115,
-      //       top: 47,
-      //       child: Text(
-      //         '25',
-      //         style: TextStyle(
-      //           color: Colors.white,
-      //           fontSize: 15,
-      //           fontFamily: 'Poppins',
-      //           fontWeight: FontWeight.w400,
-      //           height: 0,
-      //         ),
-      //       ),
-      //     ),
-      //     Positioned(
-      //       left: 115,
-      //       top: 138,
-      //       child: Text(
-      //         '25',
-      //         style: TextStyle(
-      //           color: Colors.white,
-      //           fontSize: 15,
-      //           fontFamily: 'Poppins',
-      //           fontWeight: FontWeight.w400,
-      //           height: 0,
-      //         ),
-      //       ),
-      //     ),
-      //     Positioned(
-      //       left: 179,
-      //       top: 47,
-      //       child: Text(
-      //         '23',
-      //         style: TextStyle(
-      //           color: Colors.white,
-      //           fontSize: 15,
-      //           fontFamily: 'Poppins',
-      //           fontWeight: FontWeight.w400,
-      //           height: 0,
-      //         ),
-      //       ),
-      //     ),
-      //     Positioned(
-      //       left: 179,
-      //       top: 138,
-      //       child: Text(
-      //         '23',
-      //         style: TextStyle(
-      //           color: Colors.white,
-      //           fontSize: 15,
-      //           fontFamily: 'Poppins',
-      //           fontWeight: FontWeight.w400,
-      //           height: 0,
-      //         ),
-      //       ),
-      //     ),
-      //     Positioned(
-      //       left: 243,
-      //       top: 47,
-      //       child: Text(
-      //         '22',
-      //         style: TextStyle(
-      //           color: Colors.white,
-      //           fontSize: 15,
-      //           fontFamily: 'Poppins',
-      //           fontWeight: FontWeight.w400,
-      //           height: 0,
-      //         ),
-      //       ),
-      //     ),
-      //     Positioned(
-      //       left: 243,
-      //       top: 138,
-      //       child: Text(
-      //         '22',
-      //         style: TextStyle(
-      //           color: Colors.white,
-      //           fontSize: 15,
-      //           fontFamily: 'Poppins',
-      //           fontWeight: FontWeight.w400,
-      //           height: 0,
-      //         ),
-      //       ),
-      //     ),
-      //     Positioned(
-      //       left: 307,
-      //       top: 47,
-      //       child: Text(
-      //         '20',
-      //         style: TextStyle(
-      //           color: Colors.white,
-      //           fontSize: 15,
-      //           fontFamily: 'Poppins',
-      //           fontWeight: FontWeight.w400,
-      //           height: 0,
-      //         ),
-      //       ),
-      //     ),
-      //     Positioned(
-      //       left: 307,
-      //       top: 138,
-      //       child: Text(
-      //         '20',
-      //         style: TextStyle(
-      //           color: Colors.white,
-      //           fontSize: 15,
-      //           fontFamily: 'Poppins',
-      //           fontWeight: FontWeight.w400,
-      //           height: 0,
-      //         ),
-      //       ),
-      //     ),
-      //     Positioned(
-      //       left: 30,
-      //       top: 90,
-      //       child: Container(
-      //         width: 300,
-      //         height: 1,
-      //         decoration: ShapeDecoration(
-      //           color: Colors.white.withOpacity(0.5),
-      //           shape: RoundedRectangleBorder(
-      //             borderRadius: BorderRadius.circular(10),
-      //           ),
-      //         ),
+      //     Divider(), // Divider between the two horizontal ListViews
+      //     Expanded(
+      //       child: ListView.builder(
+      //         scrollDirection: Axis.horizontal,
+      //         itemCount: splitLists.length,
+      //         itemBuilder: (context, index) {
+      //           return Row(
+      //             children: List.generate(
+      //               splitLists[index].length,
+      //               (subIndex) {
+      //                 return Column(
+      //                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //                   children: [
+      //                     Text(
+      //                       AppConstants.formatTimestampToTime(
+      //                           splitLists[index][subIndex].dt!),
+      //                       style: const TextStyle(
+      //                         color: Colors.white,
+      //                         fontSize: 15,
+      //                         fontFamily: 'Poppins',
+      //                         fontWeight: FontWeight.w400,
+      //                         height: 0,
+      //                       ),
+      //                     ),
+      //                     Expanded(
+      //                       child: Row(
+      //                         crossAxisAlignment: CrossAxisAlignment.center,
+      //                         mainAxisAlignment: MainAxisAlignment.center,
+      //                         children: [
+      //                           SizedBox(
+      //                             // height: 50,
+      //                             width: AppConstants.getSize(context).width *
+      //                                 .05,
+      //                             child: CachedNetworkImage(
+      //                               imageUrl: AppConstants.getCloudImageUrl(
+      //                                   splitLists[index][subIndex]
+      //                                       .weather
+      //                                       ?.first
+      //                                       .icon),
+      //                               fit: BoxFit.cover,
+      //                             ),
+      //                           ),
+      //                           Text(
+      //                             '${splitLists[index][subIndex].main?.temp?.round()}${AppConstants.degreeSymbol}',
+      //                             style: const TextStyle(
+      //                               color: Colors.white,
+      //                               fontSize: 15,
+      //                               fontFamily: 'Poppins',
+      //                               fontWeight: FontWeight.w400,
+      //                               height: 0,
+      //                             ),
+      //                           ),
+      //                         ],
+      //                       ),
+      //                     ),
+      //                   ],
+      //                 );
+      //               },
+      //             ),
+      //           );
+      //         },
       //       ),
       //     ),
       //   ],
+      // )
+      // child: GridView.builder(
+      //   physics: const NeverScrollableScrollPhysics(),
+      //   itemCount: weatherData.length,
+      //   shrinkWrap: true,
+      //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      //       crossAxisCount: 5, crossAxisSpacing: 15),
+      //   itemBuilder: (context, index) =>
+      // Column(
+      //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //     children: [
+      //       Text(
+      //         AppConstants.formatTimestampToTime(data.dt!),
+      //         style: const TextStyle(
+      //           color: Colors.white,
+      //           fontSize: 15,
+      //           fontFamily: 'Poppins',
+      //           fontWeight: FontWeight.w400,
+      //           height: 0,
+      //         ),
+      //       ),
+      //       Expanded(
+      //         child: Row(
+      //           crossAxisAlignment: CrossAxisAlignment.center,
+      //           mainAxisAlignment: MainAxisAlignment.center,
+      //           children: [
+      //             SizedBox(
+      //               // height: 50,
+      //               width: AppConstants.getSize(context).width * .05,
+      //               child: CachedNetworkImage(
+      //                 imageUrl: AppConstants.getCloudImageUrl(
+      //                     data.weather?.first.icon),
+      //                 fit: BoxFit.cover,
+      //               ),
+      //             ),
+      //             Text(
+      //               '${data.main?.temp?.round()}${AppConstants.degreeSymbol}',
+      //               style: const TextStyle(
+      //                 color: Colors.white,
+      //                 fontSize: 15,
+      //                 fontFamily: 'Poppins',
+      //                 fontWeight: FontWeight.w400,
+      //                 height: 0,
+      //               ),
+      //             ),
+      //           ],
+      //         ),
+      //       ),
+      //     ],
+      //   ),
       // ),
+    );
+  }
+
+  Widget buildWeatherItem(WeatherData data, double width) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: width * .65),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text(
+            AppConstants.formatTimestampToTime(data.dt!),
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 15,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w400,
+              height: 0,
+            ),
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SizedBox(
+                // height: 50,
+                width: width,
+                child: CachedNetworkImage(
+                  imageUrl:
+                      AppConstants.getCloudImageUrl(data.weather?.first.icon),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Text(
+                '${data.main?.temp?.round()}${AppConstants.degreeSymbol}',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w400,
+                  height: 0,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
