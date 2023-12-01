@@ -34,6 +34,19 @@ class _TodayCardState extends State<TodayCard> {
     newIndex = widget.index;
   }
 
+  String getTodaysDate(String inputDate) {
+    DateTime parsedDate;
+    if (inputDate == 'Today') {
+      parsedDate = DateTime.now();
+    } else if (inputDate == 'Tomorrow') {
+      parsedDate = DateTime.now().add(Duration(days: 1));
+    } else {
+      parsedDate = DateFormat("dd-MMM-yyyy").parse(inputDate);
+    }
+    String formattedDate = DateFormat("dd MMM yyyy").format(parsedDate);
+    return formattedDate;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -119,7 +132,7 @@ class _TodayCardState extends State<TodayCard> {
           ),
           SizedBox(
             child: Text(
-              DateFormat('dd MMM yyyy').format(DateTime.now()),
+              getTodaysDate(selectedDate!),
               style: const TextStyle(
                 color: AppConstants.cardFontColor,
                 fontSize: 15,
