@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:weather_app/base_module/presentation/core/values/constants.dart';
 
 import '../../../../base_module/data/models/weather_response_model.dart';
-import '../../../../base_module/presentation/core/values/utils.dart';
+import '../../../../base_module/presentation/utils/utils.dart';
 import 'select_weather_date.dart';
 
 class TodayCard extends StatefulWidget {
@@ -38,8 +38,8 @@ class _TodayCardState extends State<TodayCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: AppConstants.getSize(context).width * .85,
-      height: AppConstants.getSize(context).height * .38,
+      width: getSize(context).width * .85,
+      height: getSize(context).height * .38,
       // clipBehavior: Clip.antiAlias,
       decoration: ShapeDecoration(
         color: const Color(0xFFAC736A),

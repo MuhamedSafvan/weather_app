@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../base_module/presentation/core/values/constants.dart';
+import '../../../../base_module/presentation/utils/utils.dart';
 
 class RandomTextFooter extends StatelessWidget {
   const RandomTextFooter({super.key});
@@ -7,7 +8,7 @@ class RandomTextFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: AppConstants.getSize(context).width * .85,
+      width: getSize(context).width * .85,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

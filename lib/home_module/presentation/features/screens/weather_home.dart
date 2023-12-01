@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/base_module/data/models/weather_response_model.dart';
-import '/base_module/presentation/core/values/constants.dart';
+import 'package:weather_app/base_module/presentation/core/values/app_assets.dart';
 import '../widgets/forecast_card.dart';
 import '../widgets/random_text_footer.dart';
 import '../widgets/today_card.dart';
@@ -23,7 +23,7 @@ class _WeatherHomeState extends State<WeatherHome> {
       width: double.infinity,
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(AppConstants.backgroundImage),
+          image: AssetImage(AppAssets.backgroundImage),
           fit: BoxFit.fill,
         ),
       ),

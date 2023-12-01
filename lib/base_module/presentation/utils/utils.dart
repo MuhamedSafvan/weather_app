@@ -72,3 +72,23 @@ bool isSameDay(DateTime date1, DateTime date2) {
       date1.month == date2.month &&
       date1.day == date2.day;
 }
+
+Size getSize(context) => MediaQuery.sizeOf(context);
+String capitalize(String? text) => text!.substring(1).toLowerCase();
+String formatTimestampToTime(int timestampSeconds) {
+  DateTime dateTime =
+      DateTime.fromMillisecondsSinceEpoch(timestampSeconds * 1000);
+  String formattedTime = DateFormat('h a').format(dateTime);
+
+  return formattedTime;
+}
+
+extension StringExtension on String {
+  String toCapitalized() =>
+      length > 0 ? '${this[0].toUpperCase()}${substring(1).toLowerCase()}' : '';
+
+  String toTitleCase() => replaceAll(RegExp(' +'), ' ')
+      .split(' ')
+      .map((str) => str.toCapitalized())
+      .join(' ');
+}

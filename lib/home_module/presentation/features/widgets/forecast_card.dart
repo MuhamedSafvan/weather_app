@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../base_module/data/models/weather_response_model.dart';
 import '../../../../base_module/presentation/core/values/constants.dart';
+import '../../../../base_module/presentation/utils/utils.dart';
 
 class ForeCastCard extends StatelessWidget {
   final List<WeatherData> weatherData;
@@ -16,8 +17,8 @@ class ForeCastCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      width: AppConstants.getSize(context).width * .85,
-      height: AppConstants.getSize(context).height * .2,
+      width: getSize(context).width * .85,
+      height: getSize(context).height * .2,
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       clipBehavior: Clip.antiAlias,
       decoration: ShapeDecoration(
@@ -53,7 +54,7 @@ class ForeCastCard extends StatelessWidget {
                       ? weatherData.sublist(0, 5)
                       : weatherData;
                   return buildWeatherItem(newWeatherData[index],
-                      AppConstants.getSize(context).width * .05);
+                      getSize(context).width * .05);
                 }),
           ),
           if (weatherData.length > 5)
@@ -85,7 +86,7 @@ class ForeCastCard extends StatelessWidget {
                     final newWeatherData = weatherData.sublist(5);
 
                     return buildWeatherItem(newWeatherData[index],
-                        AppConstants.getSize(context).width * .05);
+                        getSize(context).width * .05);
                   }),
             ),
           // Expanded(
@@ -331,7 +332,7 @@ class ForeCastCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text(
-            AppConstants.formatTimestampToTime(data.dt!),
+            formatTimestampToTime(data.dt!),
             style: const TextStyle(
               color: Colors.white,
               fontSize: 15,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../base_module/data/models/weather_response_model.dart';
 import '../../../../base_module/presentation/core/values/constants.dart';
-import '../../../../base_module/presentation/core/values/utils.dart';
+import '../../../../base_module/presentation/utils/utils.dart';
 
 class SelectWeatherDate extends StatefulWidget {
   final List<List<WeatherData>> weatherData;
