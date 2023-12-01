@@ -5,13 +5,26 @@ Flutter SDK Version => 3.10.5
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project detects the location and access the weather forecasts and display it.
 
-A few resources to get you started if this is your first Flutter project:
+## Screenshots
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![Screenshot 1](screenshots/screenshot_1.png)
+![Screenshot 2](screenshots/screenshot_2.png)
+![Screenshot 3](screenshots/screenshot_3.png)
+![Screenshot 4](screenshots/screenshot_4.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Dependencies
+- dio: For making HTTP requests to the OpenWeatherMap API.
+- flutter_svg: For displaying SVG icons.
+- flutter_bloc,bloc,equatable : For managing states
+- intl: For formatting dates.
+- cached_network_image : For Cached Network Images
+- geolocator : For getting location based services
+
+## Contributing
+Feel free to contribute to the project by submitting issues or pull requests. Your feedback and contributions are highly appreciated.
+
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
