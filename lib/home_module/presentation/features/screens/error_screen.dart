@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/home_module/presentation/features/screens/weather_screen.dart';
-
-import '../../../../base_module/presentation/utils/utils.dart';
-import '../../../../main.dart';
-import '../bloc/weather_bloc/weather_bloc_bloc.dart';
 
 class ErrorScreen extends StatefulWidget {
   final String message;

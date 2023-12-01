@@ -7,7 +7,7 @@ import '../widgets/today_card.dart';
 
 class WeatherHome extends StatefulWidget {
   final WeatherResponse data;
-  List<List<WeatherData>> weatherList;
+  final List<List<WeatherData>> weatherList;
   WeatherHome({super.key, required this.data, required this.weatherList});
 
   @override

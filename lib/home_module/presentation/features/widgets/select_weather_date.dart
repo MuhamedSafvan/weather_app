@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
 import '../../../../base_module/data/models/weather_response_model.dart';
-import '../../../../base_module/presentation/core/values/constants.dart';
 import '../../../../base_module/presentation/utils/utils.dart';
 
 class SelectWeatherDate extends StatefulWidget {
@@ -24,7 +22,6 @@ class _SelectWeatherDateState extends State<SelectWeatherDate> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     selectedDate =
         extractSelectedDate(widget.weatherData[widget.currentIndex][0].dt!);

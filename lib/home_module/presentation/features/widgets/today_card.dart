@@ -29,7 +29,6 @@ class _TodayCardState extends State<TodayCard> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     selectedDate = extractSelectedDate(widget.weatherData[widget.index][0].dt!);
     newIndex = widget.index;

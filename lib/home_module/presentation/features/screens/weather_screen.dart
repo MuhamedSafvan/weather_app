@@ -6,7 +6,7 @@ import '../bloc/weather_bloc/weather_bloc_bloc.dart';
 import 'weather_home.dart';
 
 class WeatherPage extends StatefulWidget {
-  bool isRetry;
+  final bool isRetry;
   WeatherPage({this.isRetry = false});
   @override
   State<WeatherPage> createState() => _WeatherPageState();
@@ -21,7 +21,6 @@ class _WeatherPageState extends State<WeatherPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getWeather();
   }

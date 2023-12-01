@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../base_module/presentation/core/values/constants.dart';
 import '../../../../base_module/presentation/utils/utils.dart';
 
 class RandomTextFooter extends StatelessWidget {
