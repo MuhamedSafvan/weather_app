@@ -47,13 +47,6 @@ class _WeatherPageState extends State<WeatherPage> {
           }
         },
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     // Trigger the event to get weather data
-      //     weatherBloc.add(const GetWeather(12.9239179, 77.6082065));
-      //   },
-      //   child: const Icon(Icons.refresh),
-      // ),
     );
   }
 }

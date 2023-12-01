@@ -39,10 +39,6 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Poppins',
         ),
         home: SplashScreen(),
-        // home: BlocProvider(
-        //   create: (context) => WeatherBlocBloc(),
-        //   child: WeatherPage(),
-        // ),
       ),
     );
   }
