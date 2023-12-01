@@ -1,6 +1,7 @@
 # weather_app
 
 A new Flutter project.
+Flutter SDK Version => 3.10.5
 
 ## Getting Started
 
